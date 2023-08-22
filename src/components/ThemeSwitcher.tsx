@@ -1,10 +1,9 @@
 import {
   IconMoonFilled,
-  IconPaintFilled,
-  IconSunFilled,
+  IconSunFilled
 } from "@tabler/icons-react";
 import { useTheme } from "next-themes";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function ThemeSwitcher() {
   const [mounted, setMounted] = useState(false);
@@ -23,7 +22,7 @@ export default function ThemeSwitcher() {
       <button
         aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
         type="button"
-        className="p-1 dark:border-black-700 border-gray-300 border-[1px] rounded-md hover:bg-gray-300 dark:hover:bg-black-700 transition duration-200"
+        className="p-2 md:p-1 dark:border-black-700 border-gray-300 border-[1px] rounded-md hover:bg-gray-300 dark:hover:bg-black-700 transition duration-200"
         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       >
         {theme === "dark" ? (

@@ -67,7 +67,7 @@ const projects = [
     name: "Zipline Docs",
     href: "https://zipline.diced.sh",
     description: "A custom documentation site for Zipline",
-    langs: ["ts", "react", "nextjs", "vercel", "mdx"],
+    langs: ["ts", "react", "nextjs", "tailwindcss", "vercel", "mdx"],
   },
   {
     name: "prisma-binaries",
@@ -85,7 +85,7 @@ const projects = [
   {
     name: "dlauncher",
     description: "An application launcher for Linux that is based on Ulauncher",
-    langs: ["rs", "gtk", "linux"],
+    langs: ["rs", "gtk3", "linux"],
     href: "https://github.com/diced/dlauncher",
   },
   {
@@ -106,7 +106,7 @@ const projects = [
     name: "dotfiles",
     description: "My dotfiles for Arch Linux (bspwm)",
     langs: ["linux", "bspwm", "sxhkd", "polybar", "picom", "alacritty"],
-    href: "https://github.com/diced/dotifles",
+    href: "https://github.com/diced/dotfiles",
   },
   {
     name: "ServerStats",
@@ -126,7 +126,7 @@ const projects = [
 
 export default function Projects() {
   return (
-    <Center className="flex-col md:px-24 px-5">
+    <Center className="flex-col md:px-60 lg:px-96 px-5">
       <h1 className="text-5xl font-extrabold text-center mt-32">Projects</h1>
       <div className="my-6">
         {projects.map((project, i) => (

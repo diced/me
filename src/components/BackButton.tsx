@@ -15,7 +15,7 @@ export default function BackButton() {
         href="/"
         aria-label={`Go back`}
         type="button"
-        className="p-1 dark:border-black-700 border-gray-300 border-[1px] rounded-md hover:bg-gray-300 dark:hover:bg-black-700 transition duration-200"
+        className="p-2 md:p-1 dark:border-black-700 border-gray-300 border-[1px] rounded-md hover:bg-gray-300 dark:hover:bg-black-700 transition duration-200"
       >
         <IconArrowBackUp className="w-5 h-5" />
       </Link>
