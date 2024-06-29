@@ -1,0 +1,57 @@
+---
+import IconMoonFilled from "./icons/IconMoonFilled.astro";
+import IconSunFilled from "./icons/IconSunFilled.astro";
+---
+
+<div
+  class="z-[9999] fixed top-0 right-0 flex items-center justify-center w-16 h-16"
+>
+  <button
+    id="theme-button"
+    aria-label={`Switch to ... mode`}
+    type="button"
+    class="p-2 md:p-1 dark:border-blue-800 border-gray-300 border-[1px] rounded-md hover:bg-gray-300 dark:hover:bg-blue-800 transition duration-200"
+  >
+    <IconSunFilled width="24" height="24" class="hidden dark:inline" />
+    <IconMoonFilled width="24" height="24" class="dark:hidden" />
+  </button>
+</div>
+
+<script>
+  function updateTheme(theme) {
+    if (theme === "light") {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    } else {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    }
+  }
+
+  function getTheme() {
+    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+      return localStorage.getItem("theme");
+    }
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      return "dark";
+    }
+    return "light";
+  }
+
+  function register() {
+    updateTheme(getTheme());
+
+    const themeButton = document.getElementById("theme-button");
+
+    themeButton.addEventListener("click", () => {
+      const theme = getTheme();
+      updateTheme(theme === "light" ? "dark" : "light");
+    });
+  }
+
+  register();
+  document.addEventListener("astro:after-swap", () => {
+    // you have to re add the event listener after swapping
+    register();
+  });
+</script>

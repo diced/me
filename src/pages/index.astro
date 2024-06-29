@@ -1,0 +1,34 @@
+---
+import HomeButton from "../components/HomeButton.astro";
+import IconBrandGitHub from "../components/icons/IconBrandGitHub.astro";
+import IconBrandSpotify from "../components/icons/IconBrandSpotify.astro";
+import IconCategory from "../components/icons/IconCategory.astro";
+import Center from "../layouts/Center.astro";
+---
+
+<Center title="dicedtomato" description="hello" class="h-screen">
+  <div>
+    <p class="text-4xl font-bold">dicedtomato</p>
+    <p class="text-xl">r</p>
+
+    <div class="my-2 space-y-2">
+      <HomeButton href="/projects" label="Projects">
+        <Fragment slot="icon">
+          <IconCategory width="24" height="24" />
+        </Fragment>
+      </HomeButton>
+
+      <HomeButton href="/github" label="GitHub">
+        <Fragment slot="icon">
+          <IconBrandGitHub width="24" height="24" />
+        </Fragment>
+      </HomeButton>
+
+      <HomeButton href="/spotify" label="Spotify">
+        <Fragment slot="icon">
+          <IconBrandSpotify width="24" height="24" />
+        </Fragment>
+      </HomeButton>
+    </div>
+  </div>
+</Center>

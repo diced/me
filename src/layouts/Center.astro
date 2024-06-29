@@ -1,0 +1,25 @@
+---
+import Layout from "./Layout.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  class?: string;
+}
+
+const { title, description, class: className } = Astro.props;
+---
+
+<Layout title={title} description={description}>
+  <main
+    class:list={[
+      className,
+      "flex",
+      "items-center",
+      "justify-center",
+      "dark:text-white",
+    ]}
+  >
+    <slot />
+  </main>
+</Layout>
