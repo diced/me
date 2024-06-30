@@ -10,7 +10,7 @@ import IconSunFilled from "./icons/IconSunFilled.astro";
     id="theme-button"
     aria-label={`Switch to ... mode`}
     type="button"
-    class="p-2 md:p-1 dark:border-blue-800 border-gray-300 border-[1px] rounded-md hover:bg-gray-300 dark:hover:bg-blue-800 transition duration-200"
+    class="p-2 md:p-1 bg-white dark:bg-blue-950 dark:border-blue-800 border-gray-300 border-[1px] rounded-md hover:bg-gray-100 dark:hover:bg-blue-900 transition duration-200"
   >
     <IconSunFilled width="24" height="24" class="hidden dark:inline" />
     <IconMoonFilled width="24" height="24" class="dark:hidden" />
@@ -32,9 +32,11 @@ import IconSunFilled from "./icons/IconSunFilled.astro";
     if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
       return localStorage.getItem("theme");
     }
+
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
       return "dark";
     }
+
     return "light";
   }
 

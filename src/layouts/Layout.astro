@@ -3,8 +3,8 @@ import BackButton from "../components/BackButton.astro";
 import ThemeButton from "../components/ThemeButton.astro";
 import { ViewTransitions } from "astro:transitions";
 interface Props {
-	title: string;
-	description: string;
+  title: string;
+  description: string;
 }
 
 const { title, description } = Astro.props;
@@ -12,63 +12,70 @@ const { title, description } = Astro.props;
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content={description}/>
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<title>{title}</title>
-		<ViewTransitions/>
-	</head>
-	<body class="dark:bg-blue-950">
-		<BackButton />
-		<ThemeButton />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <ViewTransitions />
+  </head>
+  <body class="dark:bg-blue-950">
+    <BackButton />
+    <ThemeButton />
 
-		<slot />
-	</body>
+    <slot />
+    <script is:inline>
+      function getTheme() {
+        if (
+          typeof localStorage !== "undefined" &&
+          localStorage.getItem("theme")
+        ) {
+          return localStorage.getItem("theme");
+        }
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          return "dark";
+        }
+        return "light";
+      }
+
+      function updateTheme(theme) {
+        if (theme === "light") {
+          document.documentElement.classList.remove("dark");
+        } else {
+          document.documentElement.classList.add("dark");
+        }
+      }
+
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .addEventListener("change", (e) => {
+          updateTheme(e.matches ? "dark" : "light");
+        });
+
+      document.addEventListener("astro:after-swap", () => {
+        updateTheme(getTheme());
+      });
+
+      updateTheme(getTheme());
+    </script>
+
+    <style>
+      html {
+        font-family: "JetBrains Mono Regular", monospace;
+      }
+
+      html.dark {
+        color-scheme: dark;
+      }
+
+      @font-face {
+        font-family: "JetBrains Mono Regular";
+        src: url("/fonts/JetBrainsMono-Regular.woff2") format("woff2");
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
+  </body>
 </html>
-
-<script is:inline>
-	function getTheme() {
-		if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-      return localStorage.getItem("theme");
-    }
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      return "dark";
-    }
-    return "light";
-	}
-
-	function updateTheme(theme) {
-		if (theme === "light") {
-			document.documentElement.classList.remove("dark");
-		} else {
-			document.documentElement.classList.add("dark");
-		}
-	}
-
-	window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
-		updateTheme(e.matches ? "dark" : "light");
-	});
-
-	document.addEventListener('astro:after-swap', () => {
-		updateTheme(getTheme());
-	});
-
-	updateTheme(getTheme());
-
-</script>
-
-<style>
-	html {
-		font-family: 'JetBrains Mono Regular', monospace;
-	}
-
-	@font-face {
-		font-family: 'JetBrains Mono Regular';
-		src: url('/fonts/JetBrainsMono-Regular.woff2') format('woff2');
-		font-weight: normal;
-		font-style: normal;
-		font-display: swap;
-	}
-</style>
