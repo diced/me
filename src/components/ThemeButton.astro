@@ -1,6 +1,5 @@
 ---
-import IconMoonFilled from "./icons/IconMoonFilled.astro";
-import IconSunFilled from "./icons/IconSunFilled.astro";
+import { Icon } from "astro-icon/components";
 ---
 
 <div
@@ -12,8 +11,18 @@ import IconSunFilled from "./icons/IconSunFilled.astro";
     type="button"
     class="p-2 md:p-1 bg-white dark:bg-blue-950 dark:border-blue-800 border-gray-300 border-[1px] rounded-md hover:bg-gray-100 dark:hover:bg-blue-900 transition duration-200"
   >
-    <IconSunFilled width="24" height="24" class="hidden dark:inline" />
-    <IconMoonFilled width="24" height="24" class="dark:hidden" />
+    <Icon
+      name="tabler:sun-filled"
+      width={24}
+      height={24}
+      class="hidden dark:inline"
+    />
+    <Icon
+      name="tabler:moon-filled"
+      width={24}
+      height={24}
+      class="dark:hidden"
+    />
   </button>
 </div>
 

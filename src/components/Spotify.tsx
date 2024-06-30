@@ -39,17 +39,17 @@ export default function Spotify() {
 
       <div>
         <span>by </span>
-        {data.item.artists.map((artist, index) => (
+        {data.item.artists.map((artist, i) => (
           <>
             <a
-              key={index}
+              key={i}
               href={artist.external_urls.spotify}
               className="text-blue-500 dark:text-blue-300 dark:hover:text-blue-400 hover:underline"
               target="_blank"
             >
               {artist.name}
             </a>
-            {index === data.item.artists.length - 1 ? "" : ", "}
+            {i === data.item.artists.length - 1 ? "" : ", "}
           </>
         ))}
       </div>

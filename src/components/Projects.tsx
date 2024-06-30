@@ -100,13 +100,10 @@ function ProjectCard({
       <p className="text-sm my-2">{project.description}</p>
 
       <div className="flex flex-wrap my-2">
-        {project.tags.map((tag) => (
+        {project.tags.map((tag, i) => (
           <ProjectTag
-            className={
-              selectedTags.includes(tag)
-                ? "bg-blue-100 dark:bg-blue-900"
-                : "bg-gray-100 dark:bg-blue-800"
-            }
+            key={i}
+            selected={selectedTags.includes(tag)}
             onClick={() => setSelectedTags([tag])}
           >
             {tag}
@@ -119,16 +116,20 @@ function ProjectCard({
 
 function ProjectTag({
   children,
-  className,
+  selected,
   ...props
 }: {
-  className: string;
+  selected: boolean;
   children: string;
   [key: string]: any;
 }) {
   return (
     <button
-      className={`text-xs dark:border-blue-700 border-[1px] dark:text-white rounded-md px-2.5 py-1.5 md:px-1.5 md:py-0.5 mr-2 my-1 ${className}`}
+      className={`text-xs dark:border-blue-700 border-[1px] dark:text-white rounded-md px-2.5 py-1.5 md:px-1.5 md:py-0.5 mr-2 my-1 ${
+        selected
+          ? "bg-blue-100 dark:bg-blue-900"
+          : "bg-gray-100 dark:bg-blue-800"
+      }`}
       {...props}
     >
       {children}
@@ -148,8 +149,9 @@ export default function Projects() {
   return (
     <div>
       <div className="my-1">
-        {uniqueTags.map((tag) => (
+        {uniqueTags.map((tag, i) => (
           <ProjectTag
+            key={i}
             onClick={() =>
               setSelectedTags((tags) =>
                 tags.includes(tag)
@@ -157,22 +159,14 @@ export default function Projects() {
                   : [...tags, tag],
               )
             }
-            className={
-              selectedTags.includes(tag)
-                ? "bg-blue-100 dark:bg-blue-900"
-                : "bg-gray-100 dark:bg-blue-800"
-            }
+            selected={selectedTags.includes(tag)}
           >
             {tag}
           </ProjectTag>
         ))}
         <ProjectTag
           onClick={() => setSelectedTags([])}
-          className={
-            selectedTags.length === 0
-              ? "bg-blue-100 dark:bg-blue-900"
-              : "bg-gray-100 dark:bg-blue-800"
-          }
+          selected={selectedTags.length === 0}
           aria-label="Clear tags"
         >
           x
@@ -193,8 +187,9 @@ export default function Projects() {
         )}
       </p>
 
-      {filtered.map((project) => (
+      {filtered.map((project, i) => (
         <ProjectCard
+          key={i}
           project={project}
           setSelectedTags={setSelectedTags}
           selectedTags={selectedTags}
