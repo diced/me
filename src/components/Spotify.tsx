@@ -1,6 +1,5 @@
 import useSWR from "swr";
 import type { UserResponse } from "../lib/spotify";
-import { Image } from "astro:assets";
 
 const fetcher = (url: string) =>
   fetch(url)
