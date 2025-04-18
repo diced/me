@@ -1,67 +1,67 @@
 ---
-import { Icon } from "astro-icon/components";
+import { Icon } from 'astro-icon/components';
 ---
 
 <div
-  class="z-[9999] fixed top-0 right-0 flex items-center justify-center w-16 h-16"
+  class='z-[9999] fixed top-0 right-0 flex items-center justify-center w-16 h-16'
 >
   <button
-    id="theme-button"
-    aria-label="Toggle theme"
-    type="button"
-    class="p-2 md:p-1 bg-white dark:bg-blue-950 dark:border-blue-800 border-gray-300 border-[1px] rounded-md hover:bg-gray-100 dark:hover:bg-blue-900 transition duration-200"
+    id='theme-button'
+    aria-label='Toggle theme'
+    type='button'
+    class='p-2 md:p-1 bg-white dark:bg-blue-950 dark:border-blue-800 border-gray-300 border-[1px] rounded-md hover:bg-gray-100 dark:hover:bg-blue-900 transition duration-200'
   >
     <Icon
-      name="tabler:sun-filled"
+      name='tabler:sun-filled'
       width={24}
       height={24}
-      class="hidden dark:inline"
+      class='hidden dark:inline'
     />
     <Icon
-      name="tabler:moon-filled"
+      name='tabler:moon-filled'
       width={24}
       height={24}
-      class="dark:hidden"
+      class='dark:hidden'
     />
   </button>
 </div>
 
 <script>
-  function updateTheme(theme: "light" | "dark") {
-    if (theme === "light") {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
+  function updateTheme(theme: 'light' | 'dark') {
+    if (theme === 'light') {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
     } else {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
     }
   }
 
-  function getTheme(): "dark" | "light" {
-    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-      return localStorage.getItem("theme") as "dark" | "light";
+  function getTheme(): 'dark' | 'light' {
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+      return localStorage.getItem('theme') as 'dark' | 'light';
     }
 
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      return "dark";
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
     }
 
-    return "light";
+    return 'light';
   }
 
   function register() {
     updateTheme(getTheme());
 
-    const themeButton = document.getElementById("theme-button");
+    const themeButton = document.getElementById('theme-button');
 
-    themeButton.addEventListener("click", () => {
+    themeButton.addEventListener('click', () => {
       const theme = getTheme();
-      updateTheme(theme === "light" ? "dark" : "light");
+      updateTheme(theme === 'light' ? 'dark' : 'light');
     });
   }
 
   register();
-  document.addEventListener("astro:after-swap", () => {
+  document.addEventListener('astro:after-swap', () => {
     // you have to re add the event listener after swapping
     register();
   });

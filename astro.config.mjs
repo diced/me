@@ -1,25 +1,26 @@
-import react from "@astrojs/react";
-import sitemap from "@astrojs/sitemap";
-import tailwind from "@astrojs/tailwind";
-import vercel from "@astrojs/vercel";
-import icon from "astro-icon";
-import { defineConfig, fontProviders } from "astro/config";
-import { loadEnv } from "vite";
+import react from '@astrojs/react';
+import sitemap from '@astrojs/sitemap';
+import tailwind from '@astrojs/tailwind';
+import vercel from '@astrojs/vercel';
+import icon from 'astro-icon';
+import { defineConfig, fontProviders } from 'astro/config';
+import { loadEnv } from 'vite';
 
-const { DATABASE_URL } = loadEnv(process.env.NODE_ENV, process.cwd(), "");
+// eslint-disable-next-line no-undef
+const { DATABASE_URL } = loadEnv(process.env.NODE_ENV, process.cwd(), '');
 
-import postgres from "postgres";
+import postgres from 'postgres';
 const pg = postgres(DATABASE_URL, { ssl: true });
 
 const redirects = await pg`SELECT slug, destination, status FROM redirects;`;
 
 export default defineConfig({
-  site: "https://diced.sh",
+  site: 'https://diced.sh',
   integrations: [
     tailwind(),
     react(),
     icon({
-      iconDir: "src/icons",
+      iconDir: 'src/icons',
     }),
     sitemap(),
   ],
@@ -36,12 +37,12 @@ export default defineConfig({
     fonts: [
       {
         provider: fontProviders.google(),
-        name: "JetBrains Mono",
-        cssVariable: "--font-jetbrains-mono",
+        name: 'JetBrains Mono',
+        cssVariable: '--font-jetbrains-mono',
       },
     ],
   },
-  output: "server",
+  output: 'server',
   adapter: vercel({
     imageService: true,
   }),

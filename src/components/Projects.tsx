@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export interface Project {
   name: string;
@@ -9,69 +9,69 @@ export interface Project {
 
 const projects: Project[] = [
   {
-    name: "Zipline",
-    href: "https://zipline.diced.sh/github",
-    description: "A feature packed file uploader, url shortener, and more.",
-    tags: ["ts", "react", "nextjs", "pg", "docker"],
+    name: 'Zipline',
+    href: 'https://zipline.diced.sh/github',
+    description: 'A feature packed file uploader, url shortener, and more.',
+    tags: ['ts', 'react', 'nextjs', 'pg', 'docker'],
   },
   {
-    name: "Zipline Docs",
-    href: "https://zipline.diced.sh",
-    description: "A custom documentation site for Zipline",
-    tags: ["ts", "react", "nextjs", "tailwindcss", "vercel", "mdx"],
+    name: 'Zipline Docs',
+    href: 'https://zipline.diced.sh',
+    description: 'A custom documentation site for Zipline',
+    tags: ['ts', 'react', 'nextjs', 'tailwindcss', 'vercel', 'mdx'],
   },
   {
-    name: "me",
-    description: "This website lol",
-    tags: ["ts", "astro", "tailwindcss", "vercel"],
-    href: "/",
+    name: 'me',
+    description: 'This website lol',
+    tags: ['ts', 'astro', 'tailwindcss', 'vercel'],
+    href: '/',
   },
   {
-    name: "dotfiles",
-    description: "My NixOS configuration files",
-    tags: ["linux", "nixos", "shell", "hyprland", "wayland", "gnome"],
-    href: "https://github.com/diced/dotfiles",
+    name: 'dotfiles',
+    description: 'My NixOS configuration files',
+    tags: ['linux', 'nixos', 'shell', 'hyprland', 'wayland', 'gnome'],
+    href: 'https://github.com/diced/dotfiles',
   },
   {
-    name: "prisma-binaries",
+    name: 'prisma-binaries',
     description:
-      "A docker image for linux/arm64 and linux/amd64 supported prisma binaries. this is kinda obsolete now....",
-    tags: ["docker"],
-    href: "https://github.com/diced/prisma-binaries",
+      'A docker image for linux/arm64 and linux/amd64 supported prisma binaries. this is kinda obsolete now....',
+    tags: ['docker'],
+    href: 'https://github.com/diced/prisma-binaries',
   },
   {
-    name: "dlauncher",
-    description: "An application launcher for Linux that is based on Ulauncher",
-    tags: ["rs", "gtk3", "linux"],
-    href: "https://github.com/diced/dlauncher",
+    name: 'dlauncher',
+    description: 'An application launcher for Linux that is based on Ulauncher',
+    tags: ['rs', 'gtk3', 'linux'],
+    href: 'https://github.com/diced/dlauncher',
   },
   {
-    name: "dvm",
+    name: 'dvm',
     description:
       "A version manager for Discord. This is useful on Arch Linux as you don't have to wait for a package update.",
-    tags: ["rs", "linux"],
-    href: "https://github.com/diced/dvm",
+    tags: ['rs', 'linux'],
+    href: 'https://github.com/diced/dvm',
   },
   {
-    name: "flameshot-uploader",
+    name: 'flameshot-uploader',
     description:
-      "Flameshot uploader lets you use ShareX .sxcu files with flameshot.",
-    tags: ["rs", "linux", "sharex", "flameshot"],
-    href: "https://github.com/diced/flameshot-uploader",
+      'Flameshot uploader lets you use ShareX .sxcu files with Flameshot.',
+    tags: ['rs', 'linux', 'sharex', 'flameshot'],
+    href: 'https://github.com/diced/flameshot-uploader',
   },
   {
-    name: "ServerStats",
+    name: 'ServerStats',
     description:
-      "A overengineered Minecraft mod/plugin for Fabric/Paper/Bungee/Velocity that exposes stats to a prometheus endpoint.",
-    tags: ["java", "fabric", "paper"],
-    href: "https://github.com/diced/ServerStats",
+      'An over-engineered Minecraft mod/plugin for Fabric/Paper/Bungee/Velocity that exposes stats to a prometheus endpoint.',
+    tags: ['java', 'fabric', 'paper'],
+    href: 'https://github.com/diced/ServerStats',
   },
   {
-    name: "Riptide",
+    name: 'Riptide',
     description:
-      "An overengineered Discord music bot that has a Rust gateway and Javascript workers that connect to the gateway. (Archived)",
-    tags: ["rs", "grpc", "js", "microservices"],
-    href: "https://github.com/diced/riptide",
+      'An over-engineered Discord music bot that has a Rust gateway and Javascript workers that connect to the gateway. (Archived)',
+    tags: ['rs', 'grpc', 'js', 'microservices'],
+    href: 'https://github.com/diced/riptide',
   },
 ];
 
@@ -89,18 +89,18 @@ function ProjectCard({
   selectedTags: string[];
 }) {
   return (
-    <div className="select-none project-card my-4 border-[1px] border-gray-300 dark:border-blue-800 hover:bg-gray-100 dark:hover:bg-blue-900 transition-all duration-200 rounded-md py-1.5 px-4">
+    <div className='select-none project-card my-4 border-[1px] border-gray-300 dark:border-blue-800 hover:bg-gray-100 dark:hover:bg-blue-900 transition-all duration-200 rounded-md py-1.5 px-4'>
       <a
         href={project.href}
-        className="text-xl font-bold text-blue-500 dark:text-blue-300 dark:hover:text-blue-400 hover:underline"
-        target="_blank"
+        className='text-xl font-bold text-blue-500 dark:text-blue-300 dark:hover:text-blue-400 hover:underline'
+        target='_blank' rel='noreferrer'
       >
         {project.name}
       </a>
 
-      <p className="text-sm my-2">{project.description}</p>
+      <p className='text-sm my-2'>{project.description}</p>
 
-      <div className="flex flex-wrap my-2">
+      <div className='flex flex-wrap my-2'>
         {project.tags.sort().map((tag, i) => (
           <ProjectTag
             key={i}
@@ -123,14 +123,14 @@ function ProjectTag({
 }: {
   selected: boolean;
   children: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }) {
   return (
     <button
       className={`text-xs transition-colors dark:border-blue-700 border-[1px] dark:text-white hover:bg-blue-100 hover:dark:bg-blue-700 rounded-md px-2.5 py-1.5 md:px-1.5 md:py-0.5 mr-2 my-1 ${
         selected
-          ? "bg-blue-100 dark:bg-blue-900"
-          : "bg-gray-100 dark:bg-blue-800"
+          ? 'bg-blue-100 dark:bg-blue-900'
+          : 'bg-gray-100 dark:bg-blue-800'
       }`}
       {...props}
     >
@@ -150,7 +150,7 @@ export default function Projects() {
 
   return (
     <div>
-      <div className="my-1">
+      <div className='my-1'>
         {uniqueTags.map((tag, i) => (
           <ProjectTag
             key={i}
@@ -170,23 +170,23 @@ export default function Projects() {
         <ProjectTag
           onClick={() => setSelectedTags([])}
           selected={selectedTags.length === 0}
-          aria-label="Clear tags"
-          title="Clear tags"
+          aria-label='Clear tags'
+          title='Clear tags'
         >
           x
         </ProjectTag>
       </div>
 
-      <p className="mt-2 text-xs text-gray-500">
+      <p className='mt-2 text-xs text-gray-500'>
         click on a tag to filter projects by that tag
       </p>
 
-      <p className="text-xs text-gray-500">
+      <p className='text-xs text-gray-500'>
         {selectedTags.length === 0 ? (
-          ""
+          ''
         ) : (
           <>
-            showing {filtered.length} result{filtered.length === 1 ? "" : "s"}
+            showing {filtered.length} result{filtered.length === 1 ? '' : 's'}
           </>
         )}
       </p>

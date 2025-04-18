@@ -1,23 +1,23 @@
 ---
-import Layout from "./Layout.astro";
+import type { AstroSeoProps } from '@astrolib/seo';
+import Layout from './Layout.astro';
 
 interface Props {
-  title: string;
-  description: string;
   class?: string;
+  metadata?: AstroSeoProps;
 }
 
-const { title, description, class: className } = Astro.props;
+const { class: className, metadata } = Astro.props;
 ---
 
-<Layout title={title} description={description}>
+<Layout metadata={metadata}>
   <main
     class:list={[
       className,
-      "flex",
-      "items-center",
-      "justify-center",
-      "dark:text-white",
+      'flex',
+      'items-center',
+      'justify-center',
+      'dark:text-white',
     ]}
   >
     <slot />

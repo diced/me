@@ -1,11 +1,16 @@
 ---
-import Center from "../layouts/Center.astro";
-import ProjectsComponent from "../components/Projects.tsx";
+import Center from '../layouts/Center.astro';
+import ProjectsComponent from '../components/Projects.tsx';
+
+const metadata = {
+  title: 'projects',
+  description: 'projects',
+};
 ---
 
-<Center title="dicedtomato - projects" description="projects">
-  <div class="my-24 mx-8 md:mx-[36rem]">
-    <p class="text-4xl font-bold mb-10">projects</p>
+<Center metadata={metadata}>
+  <div class='my-24 mx-8 md:mx-[36rem]'>
+    <p class='text-4xl font-bold mb-10'>projects</p>
 
     <ProjectsComponent client:load />
   </div>

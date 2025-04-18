@@ -1,42 +1,51 @@
 ---
-import BackButton from "../components/BackButton.astro";
-import ThemeButton from "../components/ThemeButton.astro";
-import { blurZoom } from "../lib/blur-zoom";
-import { ClientRouter } from "astro:transitions";
-import { Font } from "astro:assets";
+import BackButton from '../components/BackButton.astro';
+import ThemeButton from '../components/ThemeButton.astro';
+import { blurZoom } from '../lib/blur-zoom';
+import { ClientRouter } from 'astro:transitions';
+import { Font } from 'astro:assets';
+import { AstroSeo } from '@astrolib/seo';
+import type { AstroSeoProps } from '@astrolib/seo';
+
 interface Props {
-  title: string;
-  description: string;
+  metadata?: AstroSeoProps;
 }
 
-const { title, description } = Astro.props;
+const { metadata } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang='en'>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content={description} />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>{title}</title>
+    <AstroSeo
+      titleTemplate='dicedtomato – %s'
+      description='hi'
+      canonical='https://diced.sh'
+      additionalMetaTags={[
+        { name: 'theme-color', content: '#0f172a' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      ]}
+      additionalLinkTags={[{ rel: 'icon', href: '/favicon.png' }]}
+      {...metadata}
+    />
+    <meta charset='UTF-8' />
     <ClientRouter />
 
     <script
       async
       is:inline
       data-astro-rerun
-      src="https://analytics_.diced.sh/script.js"
-      data-website-id="1a4199c1-e18c-4d22-91f4-a6e41fef4dfa"></script>
+      src='https://analytics_.diced.sh/script.js'
+      data-website-id='1a4199c1-e18c-4d22-91f4-a6e41fef4dfa'></script>
 
-    <Font cssVariable="--font-jetbrains-mono" preload />
+    <Font cssVariable='--font-jetbrains-mono' preload />
   </head>
   <body
-    class="dark:bg-blue-950"
+    class='dark:bg-blue-950'
     transition:animate={blurZoom({
-      duration: "300ms",
-      easingIn: "cubic-bezier(0.6, -0.28, 0.735, 0.045)",
-      easingOut: "cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+      duration: '300ms',
+      easingIn: 'cubic-bezier(0.6, -0.28, 0.735, 0.045)',
+      easingOut: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
     })}
   >
     <BackButton />
@@ -47,32 +56,32 @@ const { title, description } = Astro.props;
     <script is:inline>
       function getTheme() {
         if (
-          typeof localStorage !== "undefined" &&
-          localStorage.getItem("theme")
+          typeof localStorage !== 'undefined' &&
+          localStorage.getItem('theme')
         ) {
-          return localStorage.getItem("theme");
+          return localStorage.getItem('theme');
         }
-        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-          return "dark";
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'dark';
         }
-        return "light";
+        return 'light';
       }
 
       function updateTheme(theme) {
-        if (theme === "light") {
-          document.documentElement.classList.remove("dark");
+        if (theme === 'light') {
+          document.documentElement.classList.remove('dark');
         } else {
-          document.documentElement.classList.add("dark");
+          document.documentElement.classList.add('dark');
         }
       }
 
       window
-        .matchMedia("(prefers-color-scheme: dark)")
-        .addEventListener("change", (e) => {
-          updateTheme(e.matches ? "dark" : "light");
+        .matchMedia('(prefers-color-scheme: dark)')
+        .addEventListener('change', (e) => {
+          updateTheme(e.matches ? 'dark' : 'light');
         });
 
-      document.addEventListener("astro:after-swap", () => {
+      document.addEventListener('astro:after-swap', () => {
         updateTheme(getTheme());
       });
 

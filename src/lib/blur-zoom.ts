@@ -18,10 +18,10 @@ export function blurZoom({
       duration: duration ?? '300ms',
       easing: easingOut,
     },
-  }
+  };
 
   return {
     forwards: blurShrink,
     backwards: blurShrink,
-  }
+  };
 }

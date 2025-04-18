@@ -1,36 +1,40 @@
 ---
-import HomeButton from "../components/HomeButton.astro";
-import Center from "../layouts/Center.astro";
-import { Icon } from "astro-icon/components";
+import HomeButton from '../components/HomeButton.astro';
+import Center from '../layouts/Center.astro';
+import { Icon } from 'astro-icon/components';
+
+const metadata = {
+  title: 'home',
+};
 ---
 
-<Center title="dicedtomato" description="hello" class="h-screen">
+<Center class='h-screen' metadata={metadata}>
   <div>
-    <p class="text-4xl font-bold">dicedtomato</p>
-    <p class="text-md">hi</p>
+    <p class='text-4xl font-bold'>dicedtomato</p>
+    <p class='text-md'>hi</p>
 
-    <div class="my-2 space-y-2">
-      <HomeButton href="/about" label="about">
-        <Fragment slot="icon">
-          <Icon name="tabler:info-circle-filled" width={24} height={24} />
+    <div class='my-2 space-y-2'>
+      <HomeButton href='/about' label='about'>
+        <Fragment slot='icon'>
+          <Icon name='tabler:info-circle-filled' width={24} height={24} />
         </Fragment>
       </HomeButton>
 
-      <HomeButton href="/projects" label="projects">
-        <Fragment slot="icon">
-          <Icon name="tabler:category-filled" width={24} height={24} />
+      <HomeButton href='/projects' label='projects'>
+        <Fragment slot='icon'>
+          <Icon name='tabler:category-filled' width={24} height={24} />
         </Fragment>
       </HomeButton>
 
-      <HomeButton href="/go/github" label="github">
-        <Fragment slot="icon">
-          <Icon name="tabler:brand-github-filled" width={24} height={24} />
+      <HomeButton href='/go/github' label='github'>
+        <Fragment slot='icon'>
+          <Icon name='tabler:brand-github-filled' width={24} height={24} />
         </Fragment>
       </HomeButton>
 
-      <HomeButton href="/spotify" label="spotify">
-        <Fragment slot="icon">
-          <Icon name="tabler:brand-spotify-filled" width={24} height={24} />
+      <HomeButton href='/spotify' label='spotify'>
+        <Fragment slot='icon'>
+          <Icon name='tabler:brand-spotify-filled' width={24} height={24} />
         </Fragment>
       </HomeButton>
     </div>

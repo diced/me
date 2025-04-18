@@ -1,91 +1,78 @@
 ---
-import Center from "../layouts/Center.astro";
-import { Icon } from "astro-icon/components";
+import TagContainer from '../components/about/TagContainer.astro';
+import Header from '../components/about/Header.astro';
+import Link from '../components/Link.astro';
+import Center from '../layouts/Center.astro';
 
-interface Stuff {
-  title: string;
-  icon: string;
-}
+const tech: string[] = [
+  'Linux',
+  'Arch Linux',
+  'NixOS',
+  'WSL',
 
-const stuff: Stuff[] = [
-  {
-    title: "React",
-    icon: "react",
-  },
-  {
-    title: "Next.js",
-    icon: "nextjs",
-  },
-  {
-    title: "Tailwind CSS",
-    icon: "tailwindcss",
-  },
-  {
-    title: "Node.js",
-    icon: "nodejs",
-  },
-  {
-    title: "TypeScript",
-    icon: "typescript",
-  },
-  {
-    title: "JavaScript",
-    icon: "javascript",
-  },
-  {
-    title: "Linux",
-    icon: "linux",
-  },
-  {
-    title: "Git",
-    icon: "git",
-  },
-  {
-    title: "Docker",
-    icon: "docker",
-  },
-  {
-    title: "PostgreSQL",
-    icon: "psql",
-  },
-  {
-    title: "Java",
-    icon: "java",
-  },
-  {
-    title: "Astro",
-    icon: "astro",
-  },
+  'React',
+  'Next.js',
+  'Astro',
+
+  'Tailwind CSS',
+
+  'Node.js',
+
+  'PostgreSQL',
+  'SQLite',
+  'Redis',
+
+  'Docker',
+
+  'pnpm',
+
+  'VSCode',
+
+  'git',
 ];
+
+const languages: string[] = [
+  'TypeScript',
+  'JavaScript',
+  'Python',
+  'Java',
+  'Typst',
+];
+
+const metadata = {
+  title: 'about',
+  description: 'about me',
+};
 ---
 
-<Center title="dicedtomato - about" description="about">
-  <div class="my-24 mx-8 md:mx-[36rem]">
-    <p class="text-4xl font-bold mb-10">about</p>
+<Center metadata={metadata}>
+  <div class='my-24 mx-8 md:mx-[36rem]'>
+    <p class='text-4xl font-bold mb-4'>about</p>
 
-    <p>
-      Hello, I create some useful things and sometimes pointless things. I spend
-      most of my time wasting time, gaming, watching shows, or coding.
-    </p>
+    <p>Hello, I create some useful things sometimes.</p>
 
-    <p class="mt-16">stuff I use:</p>
+    <p class='mt-8 font-bold'>things I do:</p>
+    <ul class='list-disc list-inside'>
+      <li>programming</li>
+      <li>gaming</li>
+      <li>watch shows</li>
+      <li>scroll</li>
+    </ul>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 mt-4">
-      {
-        stuff.map((item) => (
-          <div class="select-none border-[1px] border-gray-300 dark:border-blue-800 hover:bg-gray-100 dark:hover:bg-blue-900 transition-all duration-200 rounded-md py-2.5 px-5 md:py-1.5 md:px-4">
-            <div class="flex items-center">
-              <Icon
-                name={item.icon}
-                width={48}
-                height={48}
-                class="rounded-md"
-              />
-              <p class="text-sm ml-2">{item.title}</p>
-            </div>
-          </div>
-        ))
-      }
-    </div>
+    <Header>stuff I use:</Header>
+    <TagContainer tags={tech} />
+
+    <Header>languages I use:</Header>
+    <TagContainer tags={languages} />
+
+    <Header>useful links:</Header>
+    <ul class='list-disc list-inside'>
+      <li>
+        <Link href='/go/github'>GitHub</Link>
+      </li>
+      <li>
+        <Link href='/go/zipline'>Zipline</Link>
+      </li>
+    </ul>
   </div>
 </Center>
