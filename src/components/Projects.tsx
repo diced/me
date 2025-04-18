@@ -77,7 +77,7 @@ const projects: Project[] = [
 
 const uniqueTags = Array.from(
   new Set(projects.flatMap((project) => project.tags)),
-);
+).sort();
 
 function ProjectCard({
   project,
@@ -101,11 +101,12 @@ function ProjectCard({
       <p className="text-sm my-2">{project.description}</p>
 
       <div className="flex flex-wrap my-2">
-        {project.tags.map((tag, i) => (
+        {project.tags.sort().map((tag, i) => (
           <ProjectTag
             key={i}
             selected={selectedTags.includes(tag)}
             onClick={() => setSelectedTags([tag])}
+            title={`Filter by "${tag}"`}
           >
             {tag}
           </ProjectTag>
@@ -161,6 +162,7 @@ export default function Projects() {
               )
             }
             selected={selectedTags.includes(tag)}
+            title={`Filter by "${tag}"`}
           >
             {tag}
           </ProjectTag>
@@ -169,6 +171,7 @@ export default function Projects() {
           onClick={() => setSelectedTags([])}
           selected={selectedTags.length === 0}
           aria-label="Clear tags"
+          title="Clear tags"
         >
           x
         </ProjectTag>

@@ -7,7 +7,6 @@ const fetcher = (url: string) =>
     .then((res) => (res.error ? Promise.reject(res.error) : res));
 
 export default function Spotify() {
-  // const { d, error, i } = useSWR<UserResponse>(
   const { data, error, isLoading } = useSWR<UserResponse>(
     "https://spotify.diced.sh/user/pranaco_og",
     fetcher,
@@ -18,10 +17,12 @@ export default function Spotify() {
 
   if (error) return <div>Error: {error}</div>;
   return (
-    <div>
+    <div className="max-w-[300px] w-[300px]">
       {isLoading ? (
         <div className="flex h-[300px] w-[300px] items-center justify-center my-2 rounded-md border-[1px] border-gray-300 dark:border-blue-800">
-          <span className="text-3xl">😭</span>
+          <span className="text-3xl bg-blue-800/30 rounded-md h-[300px] w-[300px] flex items-center justify-center">
+            <span className="animate-spin">😭</span>
+          </span>
         </div>
       ) : (
         <img
@@ -40,29 +41,49 @@ export default function Spotify() {
           href={data.item.external_urls.spotify}
           className="my-2 text-blue-500 dark:text-blue-300 dark:hover:text-blue-400 hover:underline"
           target="_blank"
+          title={`Listen to ${data.item.name} on Spotify`}
         >
-          {data.item.name}
+          {data.item.name.length > 28 ? (
+            <span>{data.item.name.substring(0, 28)}...</span>
+          ) : (
+            <span>{data.item.name}</span>
+          )}
         </a>
       )}
 
-      <div className="flex items-center">
-        <span className="mr-2">by </span>
+      <div className="flex items-center break-words whitespace-normal">
+        <span className="mr-2 flex-shrink-0">by </span>
         {isLoading ? (
           <span className="flex h-4 w-full animate-pulse rounded-md bg-gray-300 dark:bg-blue-800" />
         ) : (
-          data.item.artists.map((artist, i) => (
-            <>
-              <a
-                key={i}
-                href={artist.external_urls.spotify}
-                className="text-blue-500 dark:text-blue-300 dark:hover:text-blue-400 hover:underline"
-                target="_blank"
-              >
-                {artist.name}
-              </a>
-              {i === data.item.artists.length - 1 ? "" : ", "}
-            </>
-          ))
+          // data.item.artists.map((artist, i) => (
+          //   <>
+          //     <a
+          //       key={i}
+          //       href={artist.external_urls.spotify}
+          //       className="text-blue-500 dark:text-blue-300 dark:hover:text-blue-400 hover:underline"
+          //       target="_blank"
+          //     >
+          //       {artist.name}
+          //     </a>
+          //     {i === data.item.artists.length - 1 ? "" : <>,&nbsp;</>}
+          //   </>
+          // ))
+          <span>
+            {data.item.artists.map((artist, i) => (
+              <>
+                <a
+                  key={i}
+                  href={artist.external_urls.spotify}
+                  className="text-blue-500 dark:text-blue-300 dark:hover:text-blue-400 hover:underline"
+                  target="_blank"
+                >
+                  {artist.name}
+                </a>
+                {i < data.item.artists.length - 1 && ", "}
+              </>
+            ))}
+          </span>
         )}
       </div>
 

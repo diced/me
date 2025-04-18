@@ -1,6 +1,7 @@
 ---
 import BackButton from "../components/BackButton.astro";
 import ThemeButton from "../components/ThemeButton.astro";
+import { blurZoom } from "../lib/blur-zoom";
 import { ClientRouter } from "astro:transitions";
 import { Font } from "astro:assets";
 interface Props {
@@ -9,28 +10,6 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
-
-const duration = "350ms";
-const easingIn = "cubic-bezier(0.8, 0, 0.2, 1)";
-const easingOut = "cubic-bezier(0.2, 0, 0.8, 1)";
-
-const blurShrink = {
-  old: {
-    name: "blur-shrink-out",
-    duration,
-    easing: easingIn,
-  },
-  new: {
-    name: "blur-shrink-in",
-    duration,
-    easing: easingOut,
-  },
-};
-
-const blurZoom = {
-  forwards: blurShrink,
-  backwards: blurShrink,
-};
 ---
 
 <!doctype html>
@@ -52,7 +31,14 @@ const blurZoom = {
 
     <Font cssVariable="--font-jetbrains-mono" preload />
   </head>
-  <body class="dark:bg-blue-950" transition:animate={blurZoom}>
+  <body
+    class="dark:bg-blue-950"
+    transition:animate={blurZoom({
+      duration: "300ms",
+      easingIn: "cubic-bezier(0.6, -0.28, 0.735, 0.045)",
+      easingOut: "cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+    })}
+  >
     <BackButton />
     <ThemeButton />
 
@@ -101,28 +87,37 @@ const blurZoom = {
       html.dark {
         color-scheme: dark;
       }
-      /* old page: blur + shrink out toward center */
+
       @keyframes blur-shrink-out {
-        from {
+        0% {
           filter: blur(0px);
           transform: scale(1);
           opacity: 1;
         }
-        to {
+        40% {
+          filter: blur(30px);
+          transform: scale(1.1);
+          opacity: 0.8;
+        }
+        100% {
           filter: blur(50px);
           transform: scale(0);
           opacity: 0;
         }
       }
 
-      /* new page: start tiny + blurred, grow & unblur */
       @keyframes blur-shrink-in {
-        from {
+        0% {
           filter: blur(50px);
           transform: scale(0);
           opacity: 0;
         }
-        to {
+        60% {
+          filter: blur(30px);
+          transform: scale(1.1);
+          opacity: 1;
+        }
+        100% {
           filter: blur(0px);
           transform: scale(1);
           opacity: 1;

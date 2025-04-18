@@ -1,8 +1,9 @@
-import { defineConfig, fontProviders } from "astro/config";
-import tailwind from "@astrojs/tailwind";
 import react from "@astrojs/react";
-import icon from "astro-icon";
+import sitemap from "@astrojs/sitemap";
+import tailwind from "@astrojs/tailwind";
 import vercel from "@astrojs/vercel";
+import icon from "astro-icon";
+import { defineConfig, fontProviders } from "astro/config";
 import { loadEnv } from "vite";
 
 const { DATABASE_URL } = loadEnv(process.env.NODE_ENV, process.cwd(), "");
@@ -13,12 +14,14 @@ const pg = postgres(DATABASE_URL, { ssl: true });
 const redirects = await pg`SELECT slug, destination, status FROM redirects;`;
 
 export default defineConfig({
+  site: "https://diced.sh",
   integrations: [
     tailwind(),
     react(),
     icon({
       iconDir: "src/icons",
     }),
+    sitemap(),
   ],
   redirects: {
     ...redirects.reduce((acc, { slug, destination, status }) => {
