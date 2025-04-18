@@ -7,7 +7,7 @@ import { Icon } from "astro-icon/components";
 >
   <button
     id="theme-button"
-    aria-label={`Switch to ... mode`}
+    aria-label="Toggle theme"
     type="button"
     class="p-2 md:p-1 bg-white dark:bg-blue-950 dark:border-blue-800 border-gray-300 border-[1px] rounded-md hover:bg-gray-100 dark:hover:bg-blue-900 transition duration-200"
   >
@@ -27,7 +27,7 @@ import { Icon } from "astro-icon/components";
 </div>
 
 <script>
-  function updateTheme(theme) {
+  function updateTheme(theme: "light" | "dark") {
     if (theme === "light") {
       document.documentElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
@@ -37,9 +37,9 @@ import { Icon } from "astro-icon/components";
     }
   }
 
-  function getTheme() {
+  function getTheme(): "dark" | "light" {
     if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-      return localStorage.getItem("theme");
+      return localStorage.getItem("theme") as "dark" | "light";
     }
 
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {

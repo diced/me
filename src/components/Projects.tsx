@@ -27,9 +27,15 @@ const projects: Project[] = [
     href: "/",
   },
   {
+    name: "dotfiles",
+    description: "My NixOS configuration files",
+    tags: ["linux", "nixos", "shell", "hyprland", "wayland", "gnome"],
+    href: "https://github.com/diced/dotfiles",
+  },
+  {
     name: "prisma-binaries",
     description:
-      "A docker image for linux/arm64 and linux/amd64 supported prisma binaries",
+      "A docker image for linux/arm64 and linux/amd64 supported prisma binaries. this is kinda obsolete now....",
     tags: ["docker"],
     href: "https://github.com/diced/prisma-binaries",
   },
@@ -52,12 +58,6 @@ const projects: Project[] = [
       "Flameshot uploader lets you use ShareX .sxcu files with flameshot.",
     tags: ["rs", "linux", "sharex", "flameshot"],
     href: "https://github.com/diced/flameshot-uploader",
-  },
-  {
-    name: "dotfiles",
-    description: "My dotfiles for Arch Linux (bspwm)",
-    tags: ["linux", "bspwm", "shell"],
-    href: "https://github.com/diced/dotfiles",
   },
   {
     name: "ServerStats",
@@ -93,6 +93,7 @@ function ProjectCard({
       <a
         href={project.href}
         className="text-xl font-bold text-blue-500 dark:text-blue-300 dark:hover:text-blue-400 hover:underline"
+        target="_blank"
       >
         {project.name}
       </a>
@@ -125,7 +126,7 @@ function ProjectTag({
 }) {
   return (
     <button
-      className={`text-xs dark:border-blue-700 border-[1px] dark:text-white rounded-md px-2.5 py-1.5 md:px-1.5 md:py-0.5 mr-2 my-1 ${
+      className={`text-xs transition-colors dark:border-blue-700 border-[1px] dark:text-white hover:bg-blue-100 hover:dark:bg-blue-700 rounded-md px-2.5 py-1.5 md:px-1.5 md:py-0.5 mr-2 my-1 ${
         selected
           ? "bg-blue-100 dark:bg-blue-900"
           : "bg-gray-100 dark:bg-blue-800"

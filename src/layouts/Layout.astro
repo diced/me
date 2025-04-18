@@ -1,13 +1,31 @@
 ---
 import BackButton from "../components/BackButton.astro";
 import ThemeButton from "../components/ThemeButton.astro";
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
+import { Font } from "astro:assets";
 interface Props {
   title: string;
   description: string;
 }
 
 const { title, description } = Astro.props;
+
+const blurShrink = {
+  old: {
+    name: "blur-shrink-out",
+    duration: "400ms",
+    easing: "ease-in",
+  },
+  new: {
+    name: "blur-shrink-in",
+    duration: "400ms",
+    easing: "ease-out",
+  },
+};
+const customTransition = {
+  forwards: blurShrink,
+  backwards: blurShrink,
+};
 ---
 
 <!doctype html>
@@ -18,14 +36,18 @@ const { title, description } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <title>{title}</title>
-    <ViewTransitions />
+    <ClientRouter />
 
     <script
       async
+      is:inline
+      data-astro-rerun
       src="https://analytics_.diced.sh/script.js"
       data-website-id="1a4199c1-e18c-4d22-91f4-a6e41fef4dfa"></script>
+
+    <Font cssVariable="--font-jetbrains-mono" preload />
   </head>
-  <body class="dark:bg-blue-950">
+  <body class="dark:bg-blue-950" transition:animate={customTransition}>
     <BackButton />
     <ThemeButton />
 
@@ -66,21 +88,40 @@ const { title, description } = Astro.props;
       updateTheme(getTheme());
     </script>
 
-    <style>
+    <style is:global>
       html {
-        font-family: "JetBrains Mono Regular", monospace;
+        font-family: var(--font-jetbrains-mono), monospace;
       }
 
       html.dark {
         color-scheme: dark;
       }
+      /* old page: blur + shrink out toward center */
+      @keyframes blur-shrink-out {
+        from {
+          filter: blur(0px);
+          transform: scale(1);
+          opacity: 1;
+        }
+        to {
+          filter: blur(10px);
+          transform: scale(0);
+          opacity: 0;
+        }
+      }
 
-      @font-face {
-        font-family: "JetBrains Mono Regular";
-        src: url("/fonts/JetBrainsMono-Regular.woff2") format("woff2");
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
+      /* new page: start tiny + blurred, grow & unblur */
+      @keyframes blur-shrink-in {
+        from {
+          filter: blur(10px);
+          transform: scale(0);
+          opacity: 0;
+        }
+        to {
+          filter: blur(0px);
+          transform: scale(1);
+          opacity: 1;
+        }
       }
     </style>
   </body>
