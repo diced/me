@@ -7,6 +7,7 @@ const fetcher = (url: string) =>
     .then((res) => (res.error ? Promise.reject(res.error) : res));
 
 export default function Spotify() {
+  // const { d, error, i } = useSWR<UserResponse>(
   const { data, error, isLoading } = useSWR<UserResponse>(
     "https://spotify.diced.sh/user/pranaco_og",
     fetcher,
@@ -15,53 +16,69 @@ export default function Spotify() {
     },
   );
 
-  if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
-
   return (
     <div>
-      <img
-        src={data.item.album.images[1].url}
-        height={data.item.album.images[1].height}
-        width={data.item.album.images[1].width}
-        alt={data.item.album.name}
-        className="my-2 rounded-md border-[1px] border-gray-300 dark:border-blue-800"
-      />
+      {isLoading ? (
+        <div className="flex h-[300px] w-[300px] items-center justify-center my-2 rounded-md border-[1px] border-gray-300 dark:border-blue-800">
+          <span className="text-3xl">😭</span>
+        </div>
+      ) : (
+        <img
+          src={data.item.album.images[1].url}
+          height={data.item.album.images[1].height}
+          width={data.item.album.images[1].width}
+          alt={data.item.album.name}
+          className="my-2 rounded-md border-[1px] border-gray-300 dark:border-blue-800"
+        />
+      )}
 
-      <a
-        href={data.item.external_urls.spotify}
-        className="my-2 text-blue-500 dark:text-blue-300 dark:hover:text-blue-400 hover:underline"
-        target="_blank"
-      >
-        {data.item.name}
-      </a>
-
-      <div>
-        <span>by </span>
-        {data.item.artists.map((artist, i) => (
-          <>
-            <a
-              key={i}
-              href={artist.external_urls.spotify}
-              className="text-blue-500 dark:text-blue-300 dark:hover:text-blue-400 hover:underline"
-              target="_blank"
-            >
-              {artist.name}
-            </a>
-            {i === data.item.artists.length - 1 ? "" : ", "}
-          </>
-        ))}
-      </div>
-
-      <div>
-        <span>on </span>
+      {isLoading ? (
+        <span className="flex h-4 my-2 w-full animate-pulse rounded-md bg-gray-300 dark:bg-blue-800" />
+      ) : (
         <a
-          href={data.item.album.external_urls.spotify}
-          className="text-blue-500 dark:text-blue-300 dark:hover:text-blue-400 hover:underline"
+          href={data.item.external_urls.spotify}
+          className="my-2 text-blue-500 dark:text-blue-300 dark:hover:text-blue-400 hover:underline"
           target="_blank"
         >
-          {data.item.album.name}
+          {data.item.name}
         </a>
+      )}
+
+      <div className="flex items-center">
+        <span className="mr-2">by </span>
+        {isLoading ? (
+          <span className="flex h-4 w-full animate-pulse rounded-md bg-gray-300 dark:bg-blue-800" />
+        ) : (
+          data.item.artists.map((artist, i) => (
+            <>
+              <a
+                key={i}
+                href={artist.external_urls.spotify}
+                className="text-blue-500 dark:text-blue-300 dark:hover:text-blue-400 hover:underline"
+                target="_blank"
+              >
+                {artist.name}
+              </a>
+              {i === data.item.artists.length - 1 ? "" : ", "}
+            </>
+          ))
+        )}
+      </div>
+
+      <div className="flex items-center">
+        <span className="mr-2">on </span>
+        {isLoading ? (
+          <span className="flex h-4 w-full animate-pulse rounded-md bg-gray-300 dark:bg-blue-800" />
+        ) : (
+          <a
+            href={data.item.album.external_urls.spotify}
+            className="text-blue-500 dark:text-blue-300 dark:hover:text-blue-400 hover:underline"
+            target="_blank"
+          >
+            {data.item.album.name}
+          </a>
+        )}
       </div>
 
       <div className="my-2 flex items-center justify-between">
@@ -69,25 +86,34 @@ export default function Spotify() {
           <div
             className="h-full bg-blue-300 dark:bg-blue-400 rounded-full"
             style={{
-              width: `${(data.progress_ms / data.item.duration_ms) * 100}%`,
+              width: `${((data?.progress_ms ?? 0) / (data?.item?.duration_ms || 1)) * 100}%`,
             }}
           />
         </div>
       </div>
 
       <div className="w-full flex justify-between">
-        <p className="text-xs">
-          {Math.floor(data.progress_ms / 1000 / 60)}:
-          {Math.floor((data.progress_ms / 1000) % 60)
-            .toString()
-            .padStart(2, "0")}
-        </p>
-        <p className="text-xs">
-          {Math.floor(data.item.duration_ms / 1000 / 60)}:
-          {Math.floor((data.item.duration_ms / 1000) % 60)
-            .toString()
-            .padStart(2, "0")}
-        </p>
+        {isLoading ? (
+          <>
+            <span className="flex h-4 w-1/6 animate-pulse rounded-md bg-gray-300 dark:bg-blue-800" />
+            <span className="flex h-4 w-1/6 animate-pulse rounded-md bg-gray-300 dark:bg-blue-800" />
+          </>
+        ) : (
+          <>
+            <p className="text-xs">
+              {Math.floor(data.progress_ms / 1000 / 60)}:
+              {Math.floor((data.progress_ms / 1000) % 60)
+                .toString()
+                .padStart(2, "0")}
+            </p>
+            <p className="text-xs">
+              {Math.floor(data.item.duration_ms / 1000 / 60)}:
+              {Math.floor((data.item.duration_ms / 1000) % 60)
+                .toString()
+                .padStart(2, "0")}
+            </p>
+          </>
+        )}
       </div>
     </div>
   );
