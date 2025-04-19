@@ -1,8 +1,8 @@
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
-import tailwind from '@astrojs/tailwind';
 import vercel from '@astrojs/vercel';
 import icon from 'astro-icon';
+import tailwindcss from '@tailwindcss/vite';
 import { defineConfig, fontProviders } from 'astro/config';
 import { loadEnv } from 'vite';
 
@@ -16,14 +16,8 @@ const redirects = await pg`SELECT slug, destination, status FROM redirects;`;
 
 export default defineConfig({
   site: 'https://diced.sh',
-  integrations: [
-    tailwind(),
-    react(),
-    icon({
-      iconDir: 'src/icons',
-    }),
-    sitemap(),
-  ],
+  integrations: [react(), icon(), sitemap()],
+
   redirects: {
     ...redirects.reduce((acc, { slug, destination, status }) => {
       acc[`/go/${slug}`] = {
@@ -33,6 +27,7 @@ export default defineConfig({
       return acc;
     }, {}),
   },
+
   experimental: {
     fonts: [
       {
@@ -42,8 +37,14 @@ export default defineConfig({
       },
     ],
   },
+
   output: 'server',
+
   adapter: vercel({
     imageService: true,
   }),
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });

@@ -1,0 +1,4 @@
+.scroll {
+  scrollbar-color: var(--color-blue-600) transparent;
+  scrollbar-gutter: stable;
+}

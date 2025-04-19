@@ -1,0 +1,44 @@
+@import 'tailwindcss';
+@import './blur-shrink.css';
+@import './scrollbar.css';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+html {
+  font-family: var(--font-jetbrains-mono), monospace;
+  color-scheme: light dark;
+  color: black;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+@theme {
+  /* Black */
+  --color-black: #000000;
+  --color-black-50: #737373;
+  --color-black-100: #6c6c6c;
+  --color-black-200: #606060;
+  --color-black-300: #535353;
+  --color-black-400: #464646;
+  --color-black-500: #393939;
+  --color-black-600: #2d2d2d;
+  --color-black-700: #202020;
+  --color-black-800: #131313;
+  --color-black-900: #060606;
+  --color-black-950: #000000;
+
+  /* Blue */
+  --color-blue-50: #dee4f2;
+  --color-blue-100: #ccd5ea;
+  --color-blue-200: #acbbdd;
+  --color-blue-300: #889dce;
+  --color-blue-400: #6782c1;
+  --color-blue-500: #4766ae;
+  --color-blue-600: #3a538d;
+  --color-blue-700: #2c406d;
+  --color-blue-800: #1e2a48;
+  --color-blue-900: #101728;
+  --color-blue-950: #090d16;
+}

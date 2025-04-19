@@ -7,6 +7,8 @@ import { Font } from 'astro:assets';
 import { AstroSeo } from '@astrolib/seo';
 import type { AstroSeoProps } from '@astrolib/seo';
 
+import '../styles/global.css';
+
 interface Props {
   metadata?: AstroSeoProps;
 }
@@ -15,7 +17,7 @@ const { metadata } = Astro.props;
 ---
 
 <!doctype html>
-<html lang='en'>
+<html lang='en' class='scroll'>
   <head>
     <AstroSeo
       titleTemplate='dicedtomato – %s'
@@ -41,7 +43,7 @@ const { metadata } = Astro.props;
     <Font cssVariable='--font-jetbrains-mono' preload />
   </head>
   <body
-    class='dark:bg-blue-950'
+    class='bg-white dark:bg-blue-950'
     transition:animate={blurZoom({
       duration: '300ms',
       easingIn: 'cubic-bezier(0.6, -0.28, 0.735, 0.045)',
@@ -87,51 +89,5 @@ const { metadata } = Astro.props;
 
       updateTheme(getTheme());
     </script>
-
-    <style is:global>
-      html {
-        font-family: var(--font-jetbrains-mono), monospace;
-      }
-
-      html.dark {
-        color-scheme: dark;
-      }
-
-      @keyframes blur-shrink-out {
-        0% {
-          filter: blur(0px);
-          transform: scale(1);
-          opacity: 1;
-        }
-        40% {
-          filter: blur(30px);
-          transform: scale(1.1);
-          opacity: 0.8;
-        }
-        100% {
-          filter: blur(50px);
-          transform: scale(0);
-          opacity: 0;
-        }
-      }
-
-      @keyframes blur-shrink-in {
-        0% {
-          filter: blur(50px);
-          transform: scale(0);
-          opacity: 0;
-        }
-        60% {
-          filter: blur(30px);
-          transform: scale(1.1);
-          opacity: 1;
-        }
-        100% {
-          filter: blur(0px);
-          transform: scale(1);
-          opacity: 1;
-        }
-      }
-    </style>
   </body>
 </html>

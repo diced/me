@@ -41,7 +41,8 @@ export default function Spotify() {
           href={data.item.external_urls.spotify}
           className='my-2 text-blue-500 dark:text-blue-300 dark:hover:text-blue-400 hover:underline'
           target='_blank'
-          title={`Listen to ${data.item.name} on Spotify`} rel='noreferrer'
+          title={`Listen to ${data.item.name} on Spotify`}
+          rel='noreferrer'
         >
           {data.item.name.length > 28 ? (
             <span>{data.item.name.substring(0, 28)}...</span>
@@ -56,19 +57,6 @@ export default function Spotify() {
         {isLoading ? (
           <span className='flex h-4 w-full animate-pulse rounded-md bg-gray-300 dark:bg-blue-800' />
         ) : (
-          // data.item.artists.map((artist, i) => (
-          //   <>
-          //     <a
-          //       key={i}
-          //       href={artist.external_urls.spotify}
-          //       className="text-blue-500 dark:text-blue-300 dark:hover:text-blue-400 hover:underline"
-          //       target="_blank"
-          //     >
-          //       {artist.name}
-          //     </a>
-          //     {i === data.item.artists.length - 1 ? "" : <>,&nbsp;</>}
-          //   </>
-          // ))
           <span>
             {data.item.artists.map((artist, i) => (
               <>
@@ -76,7 +64,8 @@ export default function Spotify() {
                   key={i}
                   href={artist.external_urls.spotify}
                   className='text-blue-500 dark:text-blue-300 dark:hover:text-blue-400 hover:underline'
-                  target='_blank' rel='noreferrer'
+                  target='_blank'
+                  rel='noreferrer'
                 >
                   {artist.name}
                 </a>
@@ -95,7 +84,8 @@ export default function Spotify() {
           <a
             href={data.item.album.external_urls.spotify}
             className='text-blue-500 dark:text-blue-300 dark:hover:text-blue-400 hover:underline'
-            target='_blank' rel='noreferrer'
+            target='_blank'
+            rel='noreferrer'
           >
             {data.item.album.name}
           </a>
@@ -103,7 +93,7 @@ export default function Spotify() {
       </div>
 
       <div className='my-2 flex items-center justify-between'>
-        <div className='relative w-full bg-gray-200 dark:bg-blue-100 h-2 rounded-md'>
+        <div className='relative w-full bg-gray-200 dark:bg-blue-800 h-2 rounded-md'>
           <div
             className='h-full bg-blue-300 dark:bg-blue-400 rounded-full'
             style={{

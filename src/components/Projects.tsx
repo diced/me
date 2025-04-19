@@ -93,7 +93,8 @@ function ProjectCard({
       <a
         href={project.href}
         className='text-xl font-bold text-blue-500 dark:text-blue-300 dark:hover:text-blue-400 hover:underline'
-        target='_blank' rel='noreferrer'
+        target='_blank'
+        rel='noreferrer'
       >
         {project.name}
       </a>
@@ -127,7 +128,7 @@ function ProjectTag({
 }) {
   return (
     <button
-      className={`text-xs transition-colors dark:border-blue-700 border-[1px] dark:text-white hover:bg-blue-100 hover:dark:bg-blue-700 rounded-md px-2.5 py-1.5 md:px-1.5 md:py-0.5 mr-2 my-1 ${
+      className={`text-xs transition-colors border-gray-300 dark:border-blue-700 border-[1px] dark:text-white hover:bg-blue-100 hover:dark:bg-blue-700 rounded-md px-2.5 py-1.5 md:px-1.5 md:py-0.5 mr-2 my-1 ${
         selected
           ? 'bg-blue-100 dark:bg-blue-900'
           : 'bg-gray-100 dark:bg-blue-800'
