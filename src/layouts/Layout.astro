@@ -1,7 +1,7 @@
 ---
 import BackButton from '../components/BackButton.astro';
 import ThemeButton from '../components/ThemeButton.astro';
-import { blurZoom } from '../lib/blur-zoom';
+import { blur } from '../lib/blur-zoom';
 import { ClientRouter } from 'astro:transitions';
 import { Font } from 'astro:assets';
 import { AstroSeo } from '@astrolib/seo';
@@ -44,10 +44,9 @@ const { metadata } = Astro.props;
   </head>
   <body
     class='bg-white dark:bg-blue-950'
-    transition:animate={blurZoom({
+    transition:animate={blur({
       duration: '300ms',
-      easingIn: 'cubic-bezier(0.6, -0.28, 0.735, 0.045)',
-      easingOut: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+      easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
     })}
   >
     <BackButton />

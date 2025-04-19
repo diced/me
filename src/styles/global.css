@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@import './blur-shrink.css';
+@import './vt.css';
 @import './scrollbar.css';
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -41,4 +41,10 @@ html.dark {
   --color-blue-800: #1e2a48;
   --color-blue-900: #101728;
   --color-blue-950: #090d16;
+}
+
+@counter-style arrow {
+  system: cyclic;
+  symbols: '▸';
+  suffix: ' ';
 }

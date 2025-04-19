@@ -1,27 +1,27 @@
-export function blurZoom({
+export function blur({
   duration,
-  easingIn,
-  easingOut,
+  easing,
+  transitionName: name,
 }: {
-  duration?: number | string,
-  easingIn: string,
-  easingOut: string,
+  duration?: number | string;
+  transitionName?: string;
+  easing: string;
 }) {
-  const blurShrink = {
+  const trans = {
     old: {
-      name: 'blur-shrink-out',
+      name: name ?? 'view-out',
       duration: duration ?? '300ms',
-      easing: easingIn,
+      easing,
     },
     new: {
-      name: 'blur-shrink-in',
+      name: name ?? 'view-in',
       duration: duration ?? '300ms',
-      easing: easingOut,
+      easing,
     },
   };
 
   return {
-    forwards: blurShrink,
-    backwards: blurShrink,
+    forwards: trans,
+    backwards: trans,
   };
 }

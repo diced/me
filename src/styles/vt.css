@@ -1,0 +1,25 @@
+:root {
+  --vt-blur: 30px;
+  --vt-offset: 150px;
+}
+
+@keyframes view-out {
+  to {
+    filter: blur(var(--vt-blur));
+    opacity: 0;
+    transform: translateY(-var(--vt-offset));
+  }
+}
+
+@keyframes view-in {
+  from {
+    filter: blur(var(--vt-blur));
+    opacity: 0;
+    transform: translateY(var(--vt-offset));
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
