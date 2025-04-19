@@ -48,10 +48,18 @@ export default defineConfig({
   vite: {
     plugins: [
       tailwindcss(),
-      visualizer({
-        emitFile: true,
-        filename: 'stats.html',
-      }),
+
+      // eslint-disable-next-line no-undef
+      ...(process.env.ANALYZE === 'true'
+        ? [
+            visualizer({
+              filename: 'stats.html',
+              open: true,
+              gzipSize: true,
+              brotliSize: true,
+            }),
+          ]
+        : []),
     ],
   },
 });
