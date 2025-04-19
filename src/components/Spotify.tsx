@@ -1,18 +1,10 @@
-import useSWR from 'swr';
+import { useIntervalFetch } from '../lib/use-interval-fetch';
 import type { UserResponse } from '../lib/spotify';
 
-const fetcher = (url: string) =>
-  fetch(url)
-    .then((res) => res.json())
-    .then((res) => (res.error ? Promise.reject(res.error) : res));
-
 export default function Spotify() {
-  const { data, error, isLoading } = useSWR<UserResponse>(
+  const { data, error, isLoading } = useIntervalFetch<UserResponse>(
     'https://spotify.diced.sh/user/pranaco_og',
-    fetcher,
-    {
-      refreshInterval: 5000,
-    },
+    5000,
   );
 
   if (error) return <div>Error: {error}</div>;

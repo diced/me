@@ -1,22 +1,23 @@
-import react from '@astrojs/react';
+import preact from '@astrojs/preact';
 import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
-import icon from 'astro-icon';
 import tailwindcss from '@tailwindcss/vite';
+import icon from 'astro-icon';
 import { defineConfig, fontProviders } from 'astro/config';
+import postgres from 'postgres';
+import { visualizer } from 'rollup-plugin-visualizer';
 import { loadEnv } from 'vite';
 
 // eslint-disable-next-line no-undef
 const { DATABASE_URL } = loadEnv(process.env.NODE_ENV, process.cwd(), '');
 
-import postgres from 'postgres';
+// gets redirects from the database
 const pg = postgres(DATABASE_URL, { ssl: true });
-
 const redirects = await pg`SELECT slug, destination, status FROM redirects;`;
 
 export default defineConfig({
   site: 'https://diced.sh',
-  integrations: [react(), icon(), sitemap()],
+  integrations: [icon(), sitemap(), preact()],
 
   redirects: {
     ...redirects.reduce((acc, { slug, destination, status }) => {
@@ -45,6 +46,12 @@ export default defineConfig({
   }),
 
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [
+      tailwindcss(),
+      visualizer({
+        emitFile: true,
+        filename: 'stats.html',
+      }),
+    ],
   },
 });
