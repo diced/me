@@ -1,6 +1,5 @@
 import preact from '@astrojs/preact';
 import sitemap from '@astrojs/sitemap';
-import vercel from '@astrojs/vercel';
 import tailwindcss from '@tailwindcss/vite';
 import icon from 'astro-icon';
 import { defineConfig, fontProviders } from 'astro/config';
@@ -38,12 +37,6 @@ export default defineConfig({
       },
     ],
   },
-
-  output: 'server',
-
-  adapter: vercel({
-    imageService: true,
-  }),
 
   vite: {
     plugins: [
