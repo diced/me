@@ -128,7 +128,7 @@ function ProjectTag({
 }) {
   return (
     <button
-      className={`text-xs transition-colors border-gray-300 dark:border-blue-700 border-[1px] dark:text-white hover:bg-blue-100 hover:dark:bg-blue-700 rounded-md px-2.5 py-1.5 md:px-1.5 md:py-0.5 mr-2 my-1 ${
+      className={`text-xs cursor-pointer transition-colors border-gray-300 dark:border-blue-700 border-[1px] dark:text-white hover:bg-blue-100 hover:dark:bg-blue-700 rounded-md px-2.5 py-1.5 md:px-1.5 md:py-0.5 mr-2 my-1 ${
         selected
           ? 'bg-blue-100 dark:bg-blue-900'
           : 'bg-gray-100 dark:bg-blue-800'

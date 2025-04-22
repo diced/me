@@ -1,4 +1,6 @@
 ---
+import { Icon } from 'astro-icon/components';
+
 interface Props {
   href: string;
   label: string;
@@ -7,13 +9,19 @@ interface Props {
 const { href, label } = Astro.props;
 ---
 
-<a
-  href={href}
-  class='flex items-center dark:bg-blue-950 dark:hover:bg-blue-900 dark:border-blue-800 hover:bg-gray-100 border-gray-300 border-[1px] transition-all duration-200 py-3 px-5 md:py-1 md:px-3 rounded-md'
->
-  <div class='mr-2'>
-    <slot name='icon' />
-  </div>
+<a href={href} class='group flex items-center transition-all py-2 md:py-0'>
+  <span class='mr-4 group-hover:translate-x-1.5 transition-all'>
+    <Icon
+      name='arrow'
+      width={12}
+      height={12}
+      class='dark:text-white text-black'
+    />
+  </span>
 
-  <span class='ml-2'>{label}</span>
+  <span
+    class='text-lg text-blue-500 dark:text-blue-300 dark:group-hover:text-blue-400 group-hover:underline'
+  >
+    {label}
+  </span>
 </a>

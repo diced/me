@@ -17,7 +17,7 @@ const redirects = await pg`SELECT slug, destination, status FROM redirects;`;
 
 export default defineConfig({
   site: 'https://diced.sh',
-  integrations: [icon(), sitemap(), preact()],
+  integrations: [icon({ iconDir: 'src/icons' }), sitemap(), preact()],
 
   redirects: {
     ...redirects.reduce((acc, { slug, destination, status }) => {
