@@ -1,0 +1,44 @@
+---
+import '../styles/global.css';
+import NewTab from '../components/newtab/NewTab.tsx';
+import { Font } from 'astro:assets';
+---
+
+<!doctype html>
+<html lang='en' class='scroll' data-page='newtab'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <title>New Tab</title>
+
+    <Font cssVariable='--font-inter' preload />
+  </head>
+  <body class='bg-white dark:bg-black-900 text-black dark:text-white'>
+    <NewTab client:load />
+
+    <script is:inline>
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+      function updateBodyClass() {
+        if (mediaQuery.matches) document.body.classList.add('dark');
+        else document.body.classList.remove('dark');
+      }
+
+      mediaQuery.addEventListener('change', updateBodyClass);
+      updateBodyClass();
+    </script>
+
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+          .register('/sw.js')
+          .then((registration) => {
+            console.log('registered sw.js');
+          })
+          .catch((error) => {
+            console.error('failed to register sw.js', error);
+          });
+      }
+    </script>
+  </body>
+</html>

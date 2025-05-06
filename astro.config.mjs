@@ -36,6 +36,11 @@ export default defineConfig({
         name: 'JetBrains Mono',
         cssVariable: '--font-jetbrains-mono',
       },
+      {
+        provider: fontProviders.google(),
+        name: 'Inter',
+        cssVariable: '--font-inter',
+      }
     ],
   },
 
