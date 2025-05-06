@@ -17,11 +17,11 @@ export default function Spotify() {
   }, [data?.progress_ms]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const interval: number = setInterval(() => {
       if (!isLoading && data?.item?.duration_ms) {
         setProgress((prev) => Math.min(prev + 1000, data.item.duration_ms));
       }
-    }, 1000);
+    }, 1000) as unknown as number;
 
     return () => clearInterval(interval);
   }, [data, isLoading]);
