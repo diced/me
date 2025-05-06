@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'preact/hooks';
 import { useIntervalFetch } from '../lib/use-interval-fetch';
 import type { UserResponse } from '../lib/spotify';
 
@@ -7,7 +8,26 @@ export default function Spotify() {
     5000,
   );
 
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    if (data?.progress_ms) {
+      setProgress(data.progress_ms);
+    }
+  }, [data?.progress_ms]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!isLoading && data?.item?.duration_ms) {
+        setProgress((prev) => Math.min(prev + 1000, data.item.duration_ms));
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [data, isLoading]);
+
   if (error) return <div>Error: {error}</div>;
+
   return (
     <div className='max-w-[300px] w-[300px]'>
       {isLoading ? (
@@ -51,9 +71,8 @@ export default function Spotify() {
         ) : (
           <span>
             {data.item.artists.map((artist, i) => (
-              <>
+              <span key={i}>
                 <a
-                  key={i}
                   href={artist.external_urls.spotify}
                   className='text-blue-500 dark:text-blue-300 dark:hover:text-blue-400 hover:underline'
                   target='_blank'
@@ -61,8 +80,8 @@ export default function Spotify() {
                 >
                   {artist.name}
                 </a>
-                {i < data.item.artists.length - 1 && ', '}
-              </>
+                {i < data.item.artists.length - 1 && ', '}
+              </span>
             ))}
           </span>
         )}
@@ -89,7 +108,7 @@ export default function Spotify() {
           <div
             className='h-full bg-blue-300 dark:bg-blue-400 rounded-full'
             style={{
-              width: `${((data?.progress_ms ?? 0) / (data?.item?.duration_ms || 1)) * 100}%`,
+              width: `${((progress ?? 0) / (data?.item?.duration_ms || 1)) * 100}%`,
             }}
           />
         </div>
@@ -104,8 +123,8 @@ export default function Spotify() {
         ) : (
           <>
             <p className='text-xs'>
-              {Math.floor(data.progress_ms / 1000 / 60)}:
-              {Math.floor((data.progress_ms / 1000) % 60)
+              {Math.floor(progress / 1000 / 60)}:
+              {Math.floor((progress / 1000) % 60)
                 .toString()
                 .padStart(2, '0')}
             </p>
