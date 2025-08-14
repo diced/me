@@ -22,14 +22,24 @@ const projects: Project[] = [
   },
   {
     name: 'me',
-    description: 'This website lol',
+    description: 'This website..',
     tags: ['ts', 'astro', 'tailwindcss', 'vercel'],
     href: '/',
   },
   {
     name: 'dotfiles',
-    description: 'My NixOS configuration files',
-    tags: ['linux', 'nixos', 'shell', 'hyprland', 'wayland', 'gnome'],
+    description: 'My Nix configuration files. Used on macos and nixos.',
+    tags: [
+      'macos',
+      'neovim',
+      'nix',
+      'linux',
+      'nixos',
+      'shell',
+      'hyprland',
+      'wayland',
+      'gnome',
+    ],
     href: 'https://github.com/diced/dotfiles',
   },
   {
@@ -41,7 +51,8 @@ const projects: Project[] = [
   },
   {
     name: 'dlauncher',
-    description: 'An application launcher for Linux that is based on Ulauncher',
+    description:
+      'An application launcher for Linux that is based on Ulauncher.',
     tags: ['rs', 'gtk3', 'linux'],
     href: 'https://github.com/diced/dlauncher',
   },

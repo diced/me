@@ -1,6 +1,6 @@
 import preact from '@astrojs/preact';
 import sitemap from '@astrojs/sitemap';
-import vercel from '@astrojs/vercel';
+import vercel from '@astrojs/vercel/serverless';
 import tailwindcss from '@tailwindcss/vite';
 import icon from 'astro-icon';
 import { defineConfig, fontProviders } from 'astro/config';
@@ -40,7 +40,7 @@ export default defineConfig({
         provider: fontProviders.google(),
         name: 'Inter',
         cssVariable: '--font-inter',
-      }
+      },
     ],
   },
 
