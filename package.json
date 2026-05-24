@@ -6,20 +6,22 @@
     "dev": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "generate-types": "wrangler types"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.4",
-    "@astrojs/preact": "^4.1.0",
-    "@astrojs/sitemap": "^3.5.0",
-    "@astrojs/vercel": "^8.2.6",
+    "@astrojs/check": "^0.9.9",
+    "@astrojs/cloudflare": "^13.5.4",
+    "@astrojs/preact": "^5.1.3",
+    "@astrojs/sitemap": "^3.7.2",
     "@astrolib/seo": "1.0.0-beta.8",
     "@iconify-json/tabler": "^1.2.22",
-    "astro": "^5.13.2",
+    "astro": "^6.3.7",
     "astro-icon": "^1.1.5",
     "preact": "^10.27.1",
     "tailwindcss": "^4.1.12",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "wrangler": "^4.94.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
@@ -43,5 +45,8 @@
       "esbuild",
       "sharp"
     ]
+  },
+  "overrides": {
+    "vite": "^7"
   }
 }

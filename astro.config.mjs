@@ -1,12 +1,13 @@
 import preact from '@astrojs/preact';
 import sitemap from '@astrojs/sitemap';
-import vercel from '@astrojs/vercel/serverless';
 import tailwindcss from '@tailwindcss/vite';
 import icon from 'astro-icon';
 import { defineConfig, fontProviders } from 'astro/config';
 import postgres from 'postgres';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { loadEnv } from 'vite';
+
+import cloudflare from '@astrojs/cloudflare';
 
 // eslint-disable-next-line no-undef
 const { DATABASE_URL } = loadEnv(process.env.NODE_ENV, process.cwd(), '');
@@ -29,20 +30,18 @@ export default defineConfig({
     }, {}),
   },
 
-  experimental: {
-    fonts: [
-      {
-        provider: fontProviders.google(),
-        name: 'JetBrains Mono',
-        cssVariable: '--font-jetbrains-mono',
-      },
-      {
-        provider: fontProviders.google(),
-        name: 'Inter',
-        cssVariable: '--font-inter',
-      },
-    ],
-  },
+  fonts: [
+    {
+      provider: fontProviders.google(),
+      name: 'JetBrains Mono',
+      cssVariable: '--font-jetbrains-mono',
+    },
+    {
+      provider: fontProviders.google(),
+      name: 'Inter',
+      cssVariable: '--font-inter',
+    },
+  ],
 
   vite: {
     plugins: [
@@ -62,5 +61,6 @@ export default defineConfig({
     ],
   },
 
-  adapter: vercel(),
+  adapter: cloudflare(),
 });
+
